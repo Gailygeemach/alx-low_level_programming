@@ -1,8 +1,9 @@
 #include "main.h"
 /**
  * print_times_table - Prints the times table of the inputs
- * @n: The value to b printed
- */void print_times_table(int n)
+ * @n: The value to be printed
+ */
+void print_times_table(int n)
 {
 	int num, mult, prod;
 
