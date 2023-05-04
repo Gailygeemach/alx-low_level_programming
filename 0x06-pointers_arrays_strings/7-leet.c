@@ -1,28 +1,25 @@
 #include "main.h"
-#include <stdio.h>
 /**
- * leet - change vowels to numbers
- * @s: analized string
- *
- * Return: String with all vowels changed
+ * leet - a leet function
+ * @x: param x
+ * Return: a string
  */
-char *leet(char *s)
+char *leet(char *x)
 {
-	char a[] = "aeotlAEOTL";
-	char n[] = "4307143071";
-	int i = 0;
-	int j;
+	int a = 0, b, l = 5;
+	char tr[5] = {'A', 'E', 'O', 'T', 'L'};
+	char trw[5] = { '4', '3', '0', '7', '1'};
 
-	while (*(s + i) != '\0')
+	while (x[a])
 	{
-		for (j = 0; j <= 9; j++)
+		b = 0;
+		while (b < l)
 		{
-			if (*(s + i) == a[j])
-			{
-				*(s + i) = n[j];
-			}
+			if (x[a] == tr[b] || x[a] - 32 == tr[b])
+				x[a] = trw[b];
+			b++;
 		}
-		i++;
+		a++;
 	}
-	return (s);
+	return (x);
 }
