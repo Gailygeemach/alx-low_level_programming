@@ -3,36 +3,37 @@
 
 /**
  * *argstostr - A function that concatenates all the arguments of the program
- * @ac: The number of command lines arguments
- * @av: An array of size ac
- * Return: A pointer to the new string, otherwise return NULL
+ * @ac: The number of arguments
+ * @av: The array of arguments
+ * Return: A pointer to the new string or NULL if it fails
  */
 char *argstostr(int ac, char **av)
 {
-	int r, s, t, len;
-	char *s1;
+	int a, b, c = 0, len = 0;
+	char *str;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
-	for (r = 0; r < ac; r++)
+	for (a = 0; a < ac; a++)
 	{
-		for (s = 0; av[r][s] != '\0'; s++)
+		for (b = 0; av[a][b]; b++)
 			len++;
-		len++;
 	}
-	s1 = malloc(sizeof(char) * (len + 1));
-	if (s1 == NULL)
+	len += ac;
+	str = malloc(sizeof(char) * len + 1);
+	if (str == NULL)
 		return (NULL);
-	t = 0;
-	for (r = 0; r < ac; r++)
+	for (a = 0; a < ac; a++)
 	{
-		for (s = 0; av[r][s] != '\0'; s++)
+		for (b = 0; av[a][b]; b++)
 		{
-			s1[t] = av[r][s];
-			t++;
+			str[c] = av[a][b];
+			c++;
 		}
-		s1[t] = '\n';
-		t++;
+		if (str[c] == '\0')
+		{
+			str[c++] = '\n';
+		}
 	}
-	return (s1);
+	return (str);
 }
