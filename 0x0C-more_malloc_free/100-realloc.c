@@ -4,45 +4,33 @@
 #include <string.h>
 
 /**
- * _realloc - A function that reallocates a memory block using
- * malloc and free
- * @ptr: A pointer to the previously allocated memory
- * @old_size - The size of the allocated space for ptr
- * @new_size - The size for the new memory block
- * Return: if new_size == old_size return ptr
- * If new_size == 0 and ptr is not NULL, return NULL
- * Otherwise return pointer to the reallocated memory block 
+ * _realloc - reallocates a memory block using malloc and free
+ * @ptr: The pointer
+ * @old_size: The old size
+ * @new_size: The new size
+ * Return: A pointer
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	void *mem;
-	char *ptr_copy, *filler;
+	char *mem, *relloc;
 	unsigned int x;
 
+	if (ptr != NULL)
+		mem = ptr;
+	else
+	{ return (malloc(new_size)); }
 	if (new_size == old_size)
 		return (ptr);
-	if (ptr == NULL)
-	{
-		mem = malloc(new_size);
-		if (mem == NULL)
-			return (NULL);
-		return (mem);
-	}
 	if (new_size == 0 && ptr != NULL)
+	{ free(ptr);
+		return (0); }
+	relloc = malloc(new_size);
+	if (relloc == NULL)
+		return (0);
+	for (x = 0; x < (old_size || x < new_size); x++)
 	{
-		free(ptr);
-		return (NULL);
+		*(relloc + x) = mem[x];
 	}
-	ptr_copy = ptr;
-	mem = malloc(sizeof(*ptr_copy) * new_size);
-	if (mem == NULL)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	filler = mem;
-	for (x = 0; x < old_size && x < new_size; x++)
-		filler[x] = *ptr_copy++;
 	free(ptr);
-	return (mem);
+	return (relloc);
 }
