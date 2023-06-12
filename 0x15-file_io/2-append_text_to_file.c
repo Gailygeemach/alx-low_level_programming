@@ -8,20 +8,20 @@
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int x, yletters, ptr;
+	int x, y, len;
 
-	if (!filename)
+	len = 0;
+	if (filename == NULL)
 		return (-1);
-	x = open(filename, O_WRONLY | O_APPEND);
-	if (x == -1)
-		return (-1);
-	if (text_content)
+	if (text_content != NULL)
 	{
-		for (yletters = 0; text_content[yletters]; yletters++)
-			ptr = write(x, text_content, yletters);
-		if (ptr == -1)
-			return (-1);
+		for (len = 0; text_content[len];)
+			len++;
 	}
+	x = open(filename, O_WRONLY | O_APPEND);
+	y = write(x, text_content, len);
+	if (x == -1 || y == -1)
+		return (-1);
 	close(x);
 	return (1);
 }
